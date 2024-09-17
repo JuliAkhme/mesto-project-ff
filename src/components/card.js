@@ -1,13 +1,6 @@
-import {
-    closeOnEscape
-} from './modals.js';
-
-const content = document.querySelector('.content');
-const cardTemplate = document.querySelector('#card-template').content;
-const placesList = document.querySelector('.places__list');
-const imagePopup = document.querySelector('.popup_type_image');
-
 function createCard({name, link}, deleteCard, likeCard, openImage) {
+    const content = document.querySelector('.content');
+    const cardTemplate = document.querySelector('#card-template').content;
     const placesItem = cardTemplate.querySelector('.places__item').cloneNode(true);
     placesItem.querySelector('.card__image').src = link;
     placesItem.querySelector('.card__image').alt = name;
@@ -34,27 +27,9 @@ function likeCard(event) {
         eventTarget.classList.remove('card__like-button--active')
     }
 }
-    
-function openImage(name, link) {
-    imagePopup.classList.add('popup_is-opened');
-    imagePopup.classList.add('popup_is-animated');
-    const placesItem = cardTemplate.querySelector('.places__item').cloneNode(true);
-    placesItem.querySelector('.card__image').src = link;
-    placesItem.querySelector('.card__image').alt = name;
-    placesItem.querySelector('.card__title').textContent = name;
-    const fullImage = document.querySelector('.popup__image'); 
-    fullImage.src = placesItem.querySelector('.card__image').src;
-    fullImage.alt = placesItem.querySelector('.card__image').alt;
-    const fullImageCaption = document.querySelector('.popup__caption');
-    fullImageCaption.textContent = placesItem.querySelector('.card__title').textContent;
-    document.addEventListener('keydown', closeOnEscape);
-}
 
 export { 
     createCard,
     deleteCard, 
-    likeCard,
-    openImage,
-    imagePopup,
-    placesList
+    likeCard
 }

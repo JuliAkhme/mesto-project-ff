@@ -18,4 +18,4 @@ function closePopupByEsc(event) {
 export { 
     openPopup, 
     closePopup 
-};
+}

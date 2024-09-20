@@ -14,8 +14,6 @@ import {
 } from './components/card.js';
 
 const placesList = document.querySelector('.places__list');
-const content = document.querySelector('.content');
-const cardTemplate = document.querySelector('#card-template').content;
     
 initialCards.forEach((element) => {
     placesList.append(createCard(element, deleteCard, likeCard, openImage));    
@@ -25,37 +23,18 @@ const editPopup = document.querySelector('.popup_type_edit');
 const editPopupButton = document.querySelector('.profile__edit-button');
 const addPopup = document.querySelector('.popup_type_new-card')
 const addPopupButton = document.querySelector('.profile__add-button');
-const image = placesList.querySelectorAll('.card__image');
+const imagePopup = document.querySelector('.popup_type_image');
 
-document.addEventListener('click', (event) => {
-    if(event.target === editPopupButton) {
-        openPopup(editPopup);
-    } else if(event.target === addPopupButton) {
-        openPopup(addPopup);
-    } else if(event.target === image) {
-        openImage();
-    }
-})
+editPopupButton.addEventListener('click', () => openPopup(editPopup));
+addPopupButton.addEventListener('click', () => openPopup(addPopup));
    
 function openImage(name, link) {
-    const imagePopup = document.querySelector('.popup_type_image');
-    imagePopup.classList.add('popup_is-opened');
-    imagePopup.classList.add('popup_is-animated');
-    const placesItem = cardTemplate.querySelector('.places__item').cloneNode(true);
-    placesItem.querySelector('.card__image').src = link;
-    placesItem.querySelector('.card__image').alt = name;
-    placesItem.querySelector('.card__title').textContent = name;
+    openPopup(imagePopup);
     const fullImage = document.querySelector('.popup__image'); 
-    fullImage.src = placesItem.querySelector('.card__image').src;
-    fullImage.alt = placesItem.querySelector('.card__image').alt;
-    const fullImageCaption = document.querySelector('.popup__caption');
-    fullImageCaption.textContent = placesItem.querySelector('.card__title').textContent;
-    document.addEventListener('click', (imagePopup) => closePopup(imagePopup));
-    document.addEventListener('keydown', (event) => {
-        if(event.key === 'Escape') {
-           closePopup(imagePopup);
-        }
-    });
+    fullImage.src = link;
+    fullImage.alt = name;
+    const fullImageCaption = imagePopup.querySelector('.popup__caption');
+    fullImageCaption.textContent = name;
 }
 
 const nameInput = document.querySelector('.popup__input_type_name');
